@@ -17,11 +17,11 @@ export async function uploadProductImage(formData: FormData): Promise<string> {
   const path = `products/${fileName}`;
 
   const { error } = await supabase.storage
-    .from("product-images")
+    .from("product-image")
     .upload(path, file, { contentType: file.type, upsert: false });
 
   if (error) throw new Error(`Error al subir: ${error.message}`);
 
-  const { data } = supabase.storage.from("product-images").getPublicUrl(path);
+  const { data } = supabase.storage.from("product-image").getPublicUrl(path);
   return data.publicUrl;
 }
