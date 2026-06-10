@@ -1,12 +1,21 @@
 "use server";
 
-import { createClient } from "@supabase/supabase-js";
+import { createServerClient } from "@supabase/ssr";
+import { cookies } from "next/headers";
 
 export async function uploadProductImage(formData: FormData): Promise<string> {
-  // Usar service role para saltear RLS en Storage
-  const supabase = createClient(
+  const cookieStore = await cookies();
+
+  // Usamos service role key para saltear RLS en Storage
+  const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!
+    process.env.SUPABASE_SERVICE_ROLE_KEY!,
+    {
+      cookies: {
+        getAll() { return cookieStore.getAll(); },
+        setAll() {},
+      },
+    }
   );
 
   const file = formData.get("file") as File;
@@ -25,7 +34,7 @@ export async function uploadProductImage(formData: FormData): Promise<string> {
     .from("product-image")
     .upload(path, file, { contentType: file.type, upsert: false });
 
-  if (error) throw new Error(`Storage error: ${error.message} (status: ${error.statusCode})`);
+  if (error) throw new Error(`Storage error: ${error.message}`);
 
   const { data } = supabase.storage.from("product-image").getPublicUrl(path);
   return data.publicUrl;
