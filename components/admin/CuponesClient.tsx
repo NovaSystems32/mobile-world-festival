@@ -43,8 +43,8 @@ export default function CuponesClient({ coupons: initial }: { coupons: Coupon[] 
   const inputClass =
     "w-full px-3.5 py-2.5 rounded-xl text-sm text-white placeholder-[#334155] focus:outline-none transition-colors";
   const inputStyle = {
-    background: "rgba(255,255,255,0.04)",
-    border: "1px solid rgba(255,255,255,0.10)",
+    background: "#131F30",
+    border: "1px solid #223040",
   };
 
   function openNew() {
@@ -131,7 +131,7 @@ export default function CuponesClient({ coupons: initial }: { coupons: Coupon[] 
         >
           <div
             className="w-full max-w-lg rounded-2xl p-6 space-y-5"
-            style={{ background: "#0F1629", border: "1px solid rgba(255,255,255,0.10)" }}
+            style={{ background: "#0F1629", border: "1px solid #223040" }}
           >
             <div className="flex items-center justify-between">
               <h2 className="text-white font-bold text-lg" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
@@ -279,7 +279,7 @@ export default function CuponesClient({ coupons: initial }: { coupons: Coupon[] 
                     style={{ ...inputStyle, colorScheme: "dark" }}
                   />
                 </div>
-                <label className="flex items-center gap-2.5 cursor-pointer p-3 rounded-xl" style={{ background: "rgba(255,255,255,0.03)" }}>
+                <label className="flex items-center gap-2.5 cursor-pointer p-3 rounded-xl" style={{ background: "#111D2E" }}>
                   <input
                     type="checkbox"
                     checked={form.is_active}
@@ -304,7 +304,7 @@ export default function CuponesClient({ coupons: initial }: { coupons: Coupon[] 
                   type="button"
                   onClick={() => setShowForm(false)}
                   className="px-5 py-2.5 rounded-xl text-[#64748B] text-sm font-medium transition-all"
-                  style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}
+                  style={{ background: "#131F30", border: "1px solid #1E2D42" }}
                 >
                   Cancelar
                 </button>
@@ -318,7 +318,7 @@ export default function CuponesClient({ coupons: initial }: { coupons: Coupon[] 
       {coupons.length === 0 ? (
         <div
           className="py-16 text-center rounded-2xl"
-          style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.06)" }}
+          style={{ background: "#0F1A29", border: "1px solid #1A2840" }}
         >
           <Tag className="w-10 h-10 text-[#334155] mx-auto mb-3" />
           <p className="text-[#475569] text-sm mb-3">No hay cupones todavía.</p>
@@ -333,12 +333,12 @@ export default function CuponesClient({ coupons: initial }: { coupons: Coupon[] 
       ) : (
         <div
           className="rounded-2xl overflow-hidden"
-          style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.06)" }}
+          style={{ background: "#0F1A29", border: "1px solid #1A2840" }}
         >
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
-                <tr style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
+                <tr style={{ borderBottom: "1px solid #1A2840" }}>
                   {["Código", "Descuento", "Uso", "Condiciones", "Estado", "Acciones"].map((h) => (
                     <th key={h} className="px-4 py-3 text-left text-[11px] font-semibold text-[#475569] uppercase tracking-wider">
                       {h}
@@ -353,7 +353,7 @@ export default function CuponesClient({ coupons: initial }: { coupons: Coupon[] 
                   return (
                     <tr
                       key={c.id}
-                      style={{ borderBottom: "1px solid rgba(255,255,255,0.04)" }}
+                      style={{ borderBottom: "1px solid #131F30" }}
                       className="hover:bg-white/[0.02] transition-colors"
                     >
                       <td className="px-4 py-3">
@@ -425,14 +425,14 @@ export default function CuponesClient({ coupons: initial }: { coupons: Coupon[] 
                           <button
                             onClick={() => openEdit(c)}
                             className="w-8 h-8 rounded-lg flex items-center justify-center text-[#64748B] hover:text-white transition-all"
-                            style={{ background: "rgba(255,255,255,0.04)" }}
+                            style={{ background: "#131F30" }}
                           >
                             <Edit2 className="w-3.5 h-3.5" />
                           </button>
                           <button
                             onClick={() => handleDelete(c.id, c.code)}
                             className="w-8 h-8 rounded-lg flex items-center justify-center text-[#64748B] hover:text-[#EF4444] transition-all"
-                            style={{ background: "rgba(255,255,255,0.04)" }}
+                            style={{ background: "#131F30" }}
                           >
                             <Trash2 className="w-3.5 h-3.5" />
                           </button>

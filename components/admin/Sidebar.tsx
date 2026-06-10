@@ -51,14 +51,14 @@ export default function Sidebar({ unreadMessages = 0 }: { unreadMessages?: numbe
 
   return (
     <aside
-      className="w-[220px] flex-shrink-0 h-screen sticky top-0 flex flex-col"
+      className="w-[200px] flex-shrink-0 h-screen sticky top-0 flex flex-col"
       style={{
-        background: "#080D1A",
-        borderRight: "1px solid rgba(255,255,255,0.06)",
+        background: "#0B1120",
+        borderRight: "1px solid #1E2A3A",
       }}
     >
       {/* Logo */}
-      <div className="px-4 py-5" style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
+      <div className="px-4 py-5" style={{ borderBottom: "1px solid #1A2840" }}>
         <div className="flex items-center gap-2.5">
           <div
             className="relative w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0"
@@ -153,7 +153,7 @@ export default function Sidebar({ unreadMessages = 0 }: { unreadMessages?: numbe
       {/* Bottom */}
       <div
         className="p-2 space-y-0.5"
-        style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}
+        style={{ borderTop: "1px solid #1A2840" }}
       >
         <Link
           href="/"

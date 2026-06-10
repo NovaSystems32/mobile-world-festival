@@ -51,7 +51,7 @@ export default function ContactosClient({ messages }: { messages: Message[] }) {
         {/* Filter tabs */}
         <div
           className="flex items-center gap-1 p-1 rounded-xl"
-          style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.07)" }}
+          style={{ background: "#131F30", border: "1px solid #1C2B3E" }}
         >
           {(["all", "unread", "read"] as const).map((f) => (
             <button
@@ -85,7 +85,7 @@ export default function ContactosClient({ messages }: { messages: Message[] }) {
       {filtered.length === 0 ? (
         <div
           className="py-16 text-center rounded-2xl"
-          style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.06)" }}
+          style={{ background: "#0F1A29", border: "1px solid #1A2840" }}
         >
           <MessageSquare className="w-10 h-10 text-[#334155] mx-auto mb-3" />
           <p className="text-[#475569] text-sm">No hay mensajes en esta categoría.</p>
@@ -97,8 +97,8 @@ export default function ContactosClient({ messages }: { messages: Message[] }) {
               key={msg.id}
               className="rounded-2xl overflow-hidden transition-all"
               style={{
-                background: msg.is_read ? "rgba(255,255,255,0.02)" : "rgba(34,211,238,0.04)",
-                border: msg.is_read ? "1px solid rgba(255,255,255,0.06)" : "1px solid rgba(34,211,238,0.18)",
+                background: msg.is_read ? "#0F1A29" : "rgba(34,211,238,0.04)",
+                border: msg.is_read ? "1px solid #1A2840" : "1px solid rgba(34,211,238,0.18)",
               }}
             >
               {/* Header row */}
@@ -148,7 +148,7 @@ export default function ContactosClient({ messages }: { messages: Message[] }) {
               {expanded === msg.id && (
                 <div
                   className="px-4 pb-4 pt-1 border-t"
-                  style={{ borderColor: "rgba(255,255,255,0.06)" }}
+                  style={{ borderColor: "#1A2840" }}
                 >
                   <div className="flex flex-wrap gap-3 mb-3">
                     {msg.phone && (
@@ -177,7 +177,7 @@ export default function ContactosClient({ messages }: { messages: Message[] }) {
 
                   <p
                     className="text-sm leading-relaxed p-3 rounded-xl mb-3"
-                    style={{ color: "#CBD5E1", background: "rgba(255,255,255,0.03)" }}
+                    style={{ color: "#CBD5E1", background: "#111D2E" }}
                   >
                     {msg.message}
                   </p>

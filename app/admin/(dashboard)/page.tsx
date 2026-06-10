@@ -145,8 +145,8 @@ export default async function AdminDashboard() {
             key={label}
             className="rounded-2xl p-4 transition-all duration-200 hover:scale-[1.02]"
             style={{
-              background: "rgba(255,255,255,0.03)",
-              border: "1px solid rgba(255,255,255,0.07)",
+              background: "#111D2E",
+              border: "1px solid #1C2B3E",
             }}
           >
             <div
@@ -172,8 +172,8 @@ export default async function AdminDashboard() {
         <div
           className="lg:col-span-1 rounded-2xl p-5 space-y-4"
           style={{
-            background: "rgba(255,255,255,0.03)",
-            border: "1px solid rgba(255,255,255,0.07)",
+            background: "#111D2E",
+            border: "1px solid #1C2B3E",
           }}
         >
           <div className="flex items-center gap-2 mb-1">
@@ -186,7 +186,7 @@ export default async function AdminDashboard() {
                 key={href}
                 href={href}
                 className="flex items-center gap-3 p-3 rounded-xl transition-all group"
-                style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.05)" }}
+                style={{ background: "#0F1A29", border: "1px solid #182438" }}
                 onMouseEnter={undefined}
               >
                 <div
@@ -209,8 +209,8 @@ export default async function AdminDashboard() {
         <div
           className="lg:col-span-2 rounded-2xl p-5 space-y-4"
           style={{
-            background: "rgba(255,255,255,0.03)",
-            border: "1px solid rgba(255,255,255,0.07)",
+            background: "#111D2E",
+            border: "1px solid #1C2B3E",
           }}
         >
           <div className="flex items-center justify-between">
@@ -245,7 +245,7 @@ export default async function AdminDashboard() {
                   key={msg.id}
                   href="/admin/contactos"
                   className="flex items-start gap-3 p-3 rounded-xl transition-all"
-                  style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.05)" }}
+                  style={{ background: "#0F1A29", border: "1px solid #182438" }}
                 >
                   <div
                     className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 text-sm font-bold mt-0.5"
@@ -282,8 +282,8 @@ export default async function AdminDashboard() {
       <div
         className="rounded-2xl overflow-hidden"
         style={{
-          background: "rgba(255,255,255,0.03)",
-          border: "1px solid rgba(255,255,255,0.07)",
+          background: "#111D2E",
+          border: "1px solid #1C2B3E",
         }}
       >
         <div className="px-5 py-4 border-b border-white/[0.06] flex items-center justify-between">

@@ -38,7 +38,7 @@ export default async function ContactosPage() {
           <div
             key={label}
             className="rounded-2xl p-4 flex items-center gap-3"
-            style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)" }}
+            style={{ background: "#111D2E", border: "1px solid #1C2B3E" }}
           >
             <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: bg }}>
               <span className="font-bold text-lg" style={{ color }}>{value}</span>

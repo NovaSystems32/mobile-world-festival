@@ -123,14 +123,14 @@ export default function ProductForm({ product, categories }: Props) {
   const inputClass =
     "w-full px-4 py-3 rounded-xl text-sm text-white placeholder-[#334155] focus:outline-none transition-colors";
   const inputStyle = {
-    background: "rgba(255,255,255,0.04)",
-    border: "1px solid rgba(255,255,255,0.10)",
+    background: "#131F30",
+    border: "1px solid #223040",
   };
   const inputFocusHandler = {
     onFocus: (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
       (e.currentTarget.style.borderColor = "rgba(59,130,246,0.50)"),
     onBlur: (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
-      (e.currentTarget.style.borderColor = "rgba(255,255,255,0.10)"),
+      (e.currentTarget.style.borderColor = "#223040"),
   };
 
   const Field = ({ label, children, required }: { label: string; children: React.ReactNode; required?: boolean }) => (
@@ -149,7 +149,7 @@ export default function ProductForm({ product, categories }: Props) {
         <Link
           href="/admin/productos"
           className="w-9 h-9 rounded-xl flex items-center justify-center text-[#64748B] hover:text-white transition-all"
-          style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}
+          style={{ background: "#131F30", border: "1px solid #1E2D42" }}
         >
           <ArrowLeft className="w-4 h-4" />
         </Link>
@@ -175,7 +175,7 @@ export default function ProductForm({ product, categories }: Props) {
       <form onSubmit={handleSubmit} className="space-y-5">
 
         {/* ── Información básica ── */}
-        <div className="rounded-2xl p-5 space-y-4" style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)" }}>
+        <div className="rounded-2xl p-5 space-y-4" style={{ background: "#111D2E", border: "1px solid #1C2B3E" }}>
           <h2 className="text-white font-semibold text-sm flex items-center gap-2">
             <span className="w-5 h-5 rounded-md bg-blue-500/20 flex items-center justify-center text-[10px] text-blue-400 font-bold">1</span>
             Información básica
@@ -209,7 +209,7 @@ export default function ProductForm({ product, categories }: Props) {
         </div>
 
         {/* ── Precios y stock ── */}
-        <div className="rounded-2xl p-5 space-y-4" style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)" }}>
+        <div className="rounded-2xl p-5 space-y-4" style={{ background: "#111D2E", border: "1px solid #1C2B3E" }}>
           <h2 className="text-white font-semibold text-sm flex items-center gap-2">
             <span className="w-5 h-5 rounded-md bg-green-500/20 flex items-center justify-center text-[10px] text-green-400 font-bold">2</span>
             Precios (USD) y stock
@@ -219,36 +219,65 @@ export default function ProductForm({ product, categories }: Props) {
             <Field label="Precio minorista (USD)" required>
               <div className="relative">
                 <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#475569] text-sm font-semibold">$</span>
-                <input type="number" step="0.01" min="0" value={form.price}
-                  onChange={(e) => setForm({ ...form, price: e.target.value })}
-                  placeholder="21.90" required
-                  className={inputClass + " pl-7"} style={inputStyle} {...inputFocusHandler} />
+                <input
+                  type="text"
+                  inputMode="decimal"
+                  value={form.price}
+                  onChange={(e) => {
+                    const v = e.target.value;
+                    if (/^[0-9]*\.?[0-9]*$/.test(v)) setForm((f) => ({ ...f, price: v }));
+                  }}
+                  placeholder="21.90"
+                  required
+                  className={inputClass + " pl-7"} style={inputStyle} {...inputFocusHandler}
+                />
               </div>
             </Field>
             <Field label="Precio mayorista (USD)">
               <div className="relative">
                 <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#475569] text-sm font-semibold">$</span>
-                <input type="number" step="0.01" min="0" value={form.wholesale_price}
-                  onChange={(e) => setForm({ ...form, wholesale_price: e.target.value })}
+                <input
+                  type="text"
+                  inputMode="decimal"
+                  value={form.wholesale_price}
+                  onChange={(e) => {
+                    const v = e.target.value;
+                    if (/^[0-9]*\.?[0-9]*$/.test(v)) setForm((f) => ({ ...f, wholesale_price: v }));
+                  }}
                   placeholder="18.50"
-                  className={inputClass + " pl-7"} style={inputStyle} {...inputFocusHandler} />
+                  className={inputClass + " pl-7"} style={inputStyle} {...inputFocusHandler}
+                />
               </div>
             </Field>
             <Field label="Stock" required>
-              <input type="number" min="0" value={form.stock}
-                onChange={(e) => setForm({ ...form, stock: e.target.value })}
-                required className={inputClass} style={inputStyle} {...inputFocusHandler} />
+              <input
+                type="text"
+                inputMode="numeric"
+                value={form.stock}
+                onChange={(e) => {
+                  const v = e.target.value;
+                  if (/^[0-9]*$/.test(v)) setForm((f) => ({ ...f, stock: v }));
+                }}
+                required className={inputClass} style={inputStyle} {...inputFocusHandler}
+              />
             </Field>
             <Field label="Alerta stock bajo">
-              <input type="number" min="0" value={form.low_stock_alert}
-                onChange={(e) => setForm({ ...form, low_stock_alert: e.target.value })}
-                className={inputClass} style={inputStyle} {...inputFocusHandler} />
+              <input
+                type="text"
+                inputMode="numeric"
+                value={form.low_stock_alert}
+                onChange={(e) => {
+                  const v = e.target.value;
+                  if (/^[0-9]*$/.test(v)) setForm((f) => ({ ...f, low_stock_alert: v }));
+                }}
+                className={inputClass} style={inputStyle} {...inputFocusHandler}
+              />
             </Field>
           </div>
         </div>
 
         {/* ── Clasificación ── */}
-        <div className="rounded-2xl p-5 space-y-4" style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)" }}>
+        <div className="rounded-2xl p-5 space-y-4" style={{ background: "#111D2E", border: "1px solid #1C2B3E" }}>
           <h2 className="text-white font-semibold text-sm flex items-center gap-2">
             <span className="w-5 h-5 rounded-md bg-purple-500/20 flex items-center justify-center text-[10px] text-purple-400 font-bold">3</span>
             Clasificación
@@ -293,7 +322,7 @@ export default function ProductForm({ product, categories }: Props) {
         </div>
 
         {/* ── Imágenes ── */}
-        <div className="rounded-2xl p-5 space-y-4" style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)" }}>
+        <div className="rounded-2xl p-5 space-y-4" style={{ background: "#111D2E", border: "1px solid #1C2B3E" }}>
           <div className="flex items-center justify-between">
             <h2 className="text-white font-semibold text-sm flex items-center gap-2">
               <span className="w-5 h-5 rounded-md bg-cyan-500/20 flex items-center justify-center text-[10px] text-cyan-400 font-bold">4</span>
@@ -311,8 +340,8 @@ export default function ProductForm({ product, categories }: Props) {
                 style={{
                   border: idx === mainImageIndex
                     ? "2px solid #3B82F6"
-                    : "1px solid rgba(255,255,255,0.10)",
-                  background: "rgba(255,255,255,0.03)",
+                    : "1px solid #223040",
+                  background: "#111D2E",
                 }}
                 onClick={() => setMainImageIndex(idx)}
                 title="Clic para establecer como foto principal"
@@ -356,7 +385,7 @@ export default function ProductForm({ product, categories }: Props) {
                 type="button"
                 onClick={() => fileInputRef.current?.click()}
                 className="rounded-xl aspect-square flex flex-col items-center justify-center gap-1.5 transition-all hover:scale-[1.02]"
-                style={{ border: "1.5px dashed rgba(255,255,255,0.15)", background: "rgba(255,255,255,0.02)" }}
+                style={{ border: "1.5px dashed rgba(255,255,255,0.15)", background: "#0F1A29" }}
               >
                 <ImagePlus className="w-5 h-5 text-[#475569]" />
                 <span className="text-[10px] text-[#475569]">Agregar</span>
@@ -409,7 +438,7 @@ export default function ProductForm({ product, categories }: Props) {
           <Link
             href="/admin/productos"
             className="px-6 py-3 rounded-xl text-sm font-medium transition-all"
-            style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", color: "#64748B" }}
+            style={{ background: "#131F30", border: "1px solid #1E2D42", color: "#64748B" }}
           >
             Cancelar
           </Link>

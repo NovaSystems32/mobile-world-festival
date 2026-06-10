@@ -7,7 +7,7 @@ export default async function DashboardLayout({ children }: { children: React.Re
   return (
     <div
       className="flex min-h-screen"
-      style={{ background: "#0A0F1E" }}
+      style={{ background: "#0D1525" }}
     >
       <Sidebar unreadMessages={unread} />
       <main className="flex-1 overflow-auto min-w-0">{children}</main>
