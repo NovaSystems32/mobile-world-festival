@@ -18,7 +18,7 @@ const navLinks = [
 export default function Header() {
   const [isOpen, setIsOpen]     = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const { items }               = useCart();
+  const { items, openCart }     = useCart();
   const totalItems              = items.reduce((a, i) => a + i.quantity, 0);
 
   useEffect(() => {
@@ -136,7 +136,7 @@ export default function Header() {
           {/* Right actions */}
           <div className="flex items-center gap-2">
             {/* Cart */}
-            <button className="relative w-10 h-10 flex items-center justify-center rounded-lg text-[#64748B] hover:text-white hover:bg-white/[0.08] transition-all">
+            <button onClick={openCart} className="relative w-10 h-10 flex items-center justify-center rounded-lg text-[#64748B] hover:text-white hover:bg-white/[0.08] transition-all">
               <ShoppingCart className="w-5 h-5" />
               {totalItems > 0 && (
                 <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-[#3B82F6] text-white text-[10px] font-bold rounded-full flex items-center justify-center">
