@@ -10,6 +10,18 @@ import { Save, ArrowLeft, Upload, X, ImagePlus, Loader2, Star } from "lucide-rea
 import Link from "next/link";
 import Image from "next/image";
 
+// ── Field fuera del componente para evitar re-mount en cada render ──
+function Field({ label, children, required }: { label: string; children: React.ReactNode; required?: boolean }) {
+  return (
+    <div>
+      <label className="block text-[#94A3B8] text-xs font-semibold mb-1.5 uppercase tracking-wider">
+        {label} {required && <span className="text-[#EF4444]">*</span>}
+      </label>
+      {children}
+    </div>
+  );
+}
+
 interface Props {
   product?: Product;
   categories: Category[];
@@ -132,15 +144,6 @@ export default function ProductForm({ product, categories }: Props) {
     onBlur: (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
       (e.currentTarget.style.borderColor = "#223040"),
   };
-
-  const Field = ({ label, children, required }: { label: string; children: React.ReactNode; required?: boolean }) => (
-    <div>
-      <label className="block text-[#94A3B8] text-xs font-semibold mb-1.5 uppercase tracking-wider">
-        {label} {required && <span className="text-[#EF4444]">*</span>}
-      </label>
-      {children}
-    </div>
-  );
 
   return (
     <div className="p-6 lg:p-8 max-w-3xl space-y-6">
