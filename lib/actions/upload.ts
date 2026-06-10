@@ -1,9 +1,14 @@
 "use server";
 
-import { createClient } from "@/lib/supabase/server";
+import { createClient } from "@supabase/supabase-js";
 
 export async function uploadProductImage(formData: FormData): Promise<string> {
-  const supabase = await createClient();
+  // Usar service role para saltear RLS en Storage
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!
+  );
+
   const file = formData.get("file") as File;
 
   if (!file || file.size === 0) throw new Error("No se recibió ningún archivo.");
