@@ -57,6 +57,20 @@ CREATE TABLE IF NOT EXISTS contact_messages (
   created_at TIMESTAMPTZ DEFAULT now()
 );
 
+-- ORDERS
+CREATE TABLE IF NOT EXISTS orders (
+  id              UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  customer_name   VARCHAR(200) NOT NULL,
+  customer_phone  VARCHAR(50) NOT NULL,
+  customer_email  VARCHAR(200),
+  items           JSONB NOT NULL DEFAULT '[]',
+  total           DECIMAL(10,2) NOT NULL,
+  status          VARCHAR(20) NOT NULL DEFAULT 'pending' CHECK (status IN ('pending','contacted','closed','cancelled')),
+  notes           TEXT,
+  created_at      TIMESTAMPTZ DEFAULT now(),
+  updated_at      TIMESTAMPTZ DEFAULT now()
+);
+
 -- COUPONS
 CREATE TABLE IF NOT EXISTS coupons (
   id             UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -115,6 +129,11 @@ CREATE POLICY "public_insert_contact"
 CREATE POLICY "admin_read_contact"
   ON contact_messages FOR SELECT
   USING (auth.role() = 'authenticated');
+
+-- Orders RLS
+ALTER TABLE orders ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "public_insert_orders" ON orders FOR INSERT WITH CHECK (true);
+CREATE POLICY "admin_all_orders" ON orders FOR ALL USING (auth.role() = 'authenticated');
 
 -- Coupons RLS
 ALTER TABLE coupons ENABLE ROW LEVEL SECURITY;

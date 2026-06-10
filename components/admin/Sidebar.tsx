@@ -5,7 +5,7 @@ import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import {
   LayoutDashboard, Package, BarChart3, Tag, LogOut, ExternalLink,
-  MessageSquare, Percent,
+  MessageSquare, Percent, ShoppingBag,
 } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 
@@ -31,6 +31,12 @@ const navSections = [
     ],
   },
   {
+    label: "Ventas",
+    items: [
+      { href: "/admin/pedidos",    icon: ShoppingBag,     label: "Pedidos"   },
+    ],
+  },
+  {
     label: "Comunicación",
     items: [
       { href: "/admin/contactos",  icon: MessageSquare,   label: "Mensajes"  },
@@ -38,7 +44,7 @@ const navSections = [
   },
 ];
 
-export default function Sidebar({ unreadMessages = 0 }: { unreadMessages?: number }) {
+export default function Sidebar({ unreadMessages = 0, pendingOrders = 0 }: { unreadMessages?: number; pendingOrders?: number }) {
   const pathname = usePathname();
   const router   = useRouter();
 
@@ -114,6 +120,7 @@ export default function Sidebar({ unreadMessages = 0 }: { unreadMessages?: numbe
               {items.map(({ href, icon: Icon, label: itemLabel }) => {
                 const active = href === "/admin" ? pathname === "/admin" : pathname.startsWith(href);
                 const isMensajes = href === "/admin/contactos";
+                const isPedidos  = href === "/admin/pedidos";
                 return (
                   <Link
                     key={href}
@@ -140,6 +147,14 @@ export default function Sidebar({ unreadMessages = 0 }: { unreadMessages?: numbe
                         style={{ background: "#22D3EE", color: "#0A0F1E" }}
                       >
                         {unreadMessages}
+                      </span>
+                    )}
+                    {isPedidos && pendingOrders > 0 && (
+                      <span
+                        className="px-1.5 py-0.5 rounded-full text-[9px] font-bold leading-none flex-shrink-0"
+                        style={{ background: "#FBBF24", color: "#0A0F1E" }}
+                      >
+                        {pendingOrders}
                       </span>
                     )}
                   </Link>

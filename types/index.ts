@@ -66,6 +66,29 @@ export interface DashboardStats {
   low_stock: number;
 }
 
+export type OrderStatus = "pending" | "contacted" | "closed" | "cancelled";
+
+export interface OrderItem {
+  product_id: string;
+  product_name: string;
+  product_image?: string;
+  price: number;
+  quantity: number;
+}
+
+export interface Order {
+  id: string;
+  customer_name: string;
+  customer_phone: string;
+  customer_email?: string;
+  items: OrderItem[];
+  total: number;
+  status: OrderStatus;
+  notes?: string;
+  created_at: string;
+  updated_at: string;
+}
+
 export interface Coupon {
   id: string;
   code: string;

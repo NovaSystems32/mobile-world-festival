@@ -1,19 +1,21 @@
 import Link from "next/link";
 import { getDashboardStats, getRecentProducts } from "@/lib/actions/products";
 import { getContactMessages, getUnreadCount } from "@/lib/actions/contact";
+import { getPendingOrdersCount } from "@/lib/actions/orders";
 import { formatPrice } from "@/lib/utils";
 import {
   Package, CheckCircle2, XCircle, Star, AlertTriangle,
-  Plus, BarChart3, Tag, MessageSquare, Percent,
+  Plus, BarChart3, Tag, MessageSquare, Percent, ShoppingBag,
   TrendingUp, ArrowRight, Eye,
 } from "lucide-react";
 
 export default async function AdminDashboard() {
-  const [stats, unread, messages, recent] = await Promise.all([
+  const [stats, unread, messages, recent, pendingOrders] = await Promise.all([
     getDashboardStats(),
     getUnreadCount(),
     getContactMessages(),
     getRecentProducts(5),
+    getPendingOrdersCount(),
   ]);
 
   const cards = [
@@ -64,6 +66,14 @@ export default async function AdminDashboard() {
       color: "#22D3EE",
       glow: "rgba(34,211,238,0.15)",
       bg: "rgba(34,211,238,0.12)",
+    },
+    {
+      label: "Pedidos pendientes",
+      value: pendingOrders,
+      icon: ShoppingBag,
+      color: "#FBBF24",
+      glow: "rgba(251,191,36,0.15)",
+      bg: "rgba(251,191,36,0.12)",
     },
   ];
 
