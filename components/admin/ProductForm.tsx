@@ -4,7 +4,7 @@ import { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { Product, Category } from "@/types";
 import { createProduct, updateProduct } from "@/lib/actions/products";
-import { uploadProductImage } from "@/lib/actions/upload";
+import { createClient } from "@/lib/supabase/client";
 import { slugify } from "@/lib/utils";
 import { Save, ArrowLeft, Upload, X, ImagePlus, Loader2, Star } from "lucide-react";
 import Link from "next/link";
@@ -80,11 +80,21 @@ export default function ProductForm({ product, categories }: Props) {
       const idx = images.length;
       setUploadingIdx(idx);
       try {
-        const fd = new FormData();
-        fd.append("file", file);
-        const url = await uploadProductImage(fd);
-        if (!url) throw new Error("No se recibió URL de la imagen.");
-        setImages((prev) => [...prev, url]);
+        const ext = file.name.split(".").pop()?.toLowerCase() || "jpg";
+        const allowed = ["jpg", "jpeg", "png", "webp", "gif"];
+        if (!allowed.includes(ext)) throw new Error("Formato no permitido. Usá JPG, PNG o WEBP.");
+        if (file.size > 5 * 1024 * 1024) throw new Error("La imagen no puede superar 5 MB.");
+
+        const fileName = `products/${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
+        const supabase = createClient();
+        const { error: upErr } = await supabase.storage
+          .from("product-image")
+          .upload(fileName, file, { contentType: file.type, upsert: false });
+        if (upErr) throw new Error(upErr.message);
+
+        const { data } = supabase.storage.from("product-image").getPublicUrl(fileName);
+        if (!data.publicUrl) throw new Error("No se obtuvo URL pública.");
+        setImages((prev) => [...prev, data.publicUrl]);
       } catch (err: unknown) {
         const msg = err instanceof Error ? err.message : String(err);
         console.error("Upload error:", msg);
