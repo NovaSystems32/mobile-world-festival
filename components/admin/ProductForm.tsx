@@ -83,9 +83,12 @@ export default function ProductForm({ product, categories }: Props) {
         const fd = new FormData();
         fd.append("file", file);
         const url = await uploadProductImage(fd);
+        if (!url) throw new Error("No se recibió URL de la imagen.");
         setImages((prev) => [...prev, url]);
       } catch (err: unknown) {
-        setError(err instanceof Error ? err.message : "Error al subir imagen.");
+        const msg = err instanceof Error ? err.message : String(err);
+        console.error("Upload error:", msg);
+        setError(`Error al subir "${file.name}": ${msg}`);
       }
     }
     setUploadingIdx(null);
