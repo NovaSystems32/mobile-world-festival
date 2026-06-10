@@ -88,11 +88,11 @@ export default function ProductForm({ product, categories }: Props) {
         const fileName = `products/${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
         const supabase = createClient();
         const { error: upErr } = await supabase.storage
-          .from("product-image")
+          .from("product.image")
           .upload(fileName, file, { contentType: file.type, upsert: false });
         if (upErr) throw new Error(upErr.message);
 
-        const { data } = supabase.storage.from("product-image").getPublicUrl(fileName);
+        const { data } = supabase.storage.from("product.image").getPublicUrl(fileName);
         if (!data.publicUrl) throw new Error("No se obtuvo URL pública.");
         setImages((prev) => [...prev, data.publicUrl]);
       } catch (err: unknown) {

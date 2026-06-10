@@ -31,11 +31,11 @@ export async function uploadProductImage(formData: FormData): Promise<string> {
   const path = `products/${fileName}`;
 
   const { error } = await supabase.storage
-    .from("product-image")
+    .from("product.image")
     .upload(path, file, { contentType: file.type, upsert: false });
 
   if (error) throw new Error(`Storage error: ${error.message}`);
 
-  const { data } = supabase.storage.from("product-image").getPublicUrl(path);
+  const { data } = supabase.storage.from("product.image").getPublicUrl(path);
   return data.publicUrl;
 }
