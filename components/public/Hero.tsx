@@ -150,7 +150,7 @@ export default function Hero() {
             </div>
 
             {/* Benefit pills */}
-            <div className="flex flex-wrap gap-2 pt-1">
+            <div className="flex flex-wrap lg:flex-nowrap gap-2 pt-1">
               {benefits.map(({ icon: Icon, label }) => (
                 <div
                   key={label}
