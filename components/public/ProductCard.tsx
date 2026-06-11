@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { ShoppingCart, MessageCircle } from "lucide-react";
 import { Product } from "@/types";
 import { formatPrice, getStockStatus, whatsappLink } from "@/lib/utils";
@@ -25,7 +26,8 @@ export default function ProductCard({ product }: { product: Product }) {
   return (
     <article className="card group flex flex-col overflow-hidden">
 
-      {/* Image */}
+      {/* Image — clickeable */}
+      <Link href={`/productos/${product.slug}`} className="block">
       <div className="relative bg-[#0F1629] overflow-hidden" style={{ aspectRatio: "1" }}>
         {product.main_image ? (
           <Image
@@ -63,6 +65,7 @@ export default function ProductCard({ product }: { product: Product }) {
           )}
         </div>
       </div>
+      </Link>
 
       {/* Content */}
       <div className="flex flex-col flex-1 p-4 gap-3">
@@ -72,9 +75,11 @@ export default function ProductCard({ product }: { product: Product }) {
           </span>
         )}
 
-        <h3 className="font-display font-semibold text-white text-sm leading-snug line-clamp-2">
-          {product.name}
-        </h3>
+        <Link href={`/productos/${product.slug}`}>
+          <h3 className="font-display font-semibold text-white text-sm leading-snug line-clamp-2 hover:text-[#60A5FA] transition-colors">
+            {product.name}
+          </h3>
+        </Link>
 
         {product.description && (
           <p className="text-[#64748B] text-xs leading-relaxed line-clamp-2">
