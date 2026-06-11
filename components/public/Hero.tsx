@@ -154,7 +154,7 @@ export default function Hero() {
               {benefits.map(({ icon: Icon, label }) => (
                 <div
                   key={label}
-                  className="flex items-center gap-2 px-3.5 py-2 rounded-xl text-sm font-medium text-[#CBD5E1] transition-all cursor-default"
+                  className="flex items-center gap-2 px-3.5 py-2 rounded-xl text-sm font-medium text-[#CBD5E1] transition-all cursor-default whitespace-nowrap"
                   style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}
                   onMouseEnter={e => {
                     (e.currentTarget as HTMLElement).style.borderColor = "rgba(0,212,255,0.35)";
