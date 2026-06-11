@@ -76,6 +76,12 @@ export default function ProductCard({ product }: { product: Product }) {
           {product.name}
         </h3>
 
+        {product.description && (
+          <p className="text-[#64748B] text-xs leading-relaxed line-clamp-2">
+            {product.description}
+          </p>
+        )}
+
         <div className="flex items-end justify-between mt-auto gap-2">
           <div>
             <p className="font-display font-bold text-white text-xl leading-none">
