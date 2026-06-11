@@ -150,6 +150,7 @@ export default function ProductForm({ product, categories }: Props) {
   const inputStyle = {
     background: "#131F30",
     border: "1px solid #223040",
+    colorScheme: "dark" as const,
   };
   const inputFocusHandler = {
     onFocus: (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
