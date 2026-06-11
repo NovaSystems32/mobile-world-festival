@@ -1,11 +1,9 @@
 import { notFound } from "next/navigation";
-import { getProductBySlug, getProducts } from "@/lib/actions/products";
+import { getProductBySlug } from "@/lib/actions/products";
+import ProductModal from "@/components/public/ProductModal";
 import ProductDetail from "@/components/public/ProductDetail";
 
-export async function generateStaticParams() {
-  const products = await getProducts();
-  return products.map((p) => ({ slug: p.slug }));
-}
+export const dynamic = "force-dynamic";
 
 export default async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
