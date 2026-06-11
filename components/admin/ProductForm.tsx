@@ -213,10 +213,10 @@ export default function ProductForm({ product, categories }: Props) {
             </Field>
           </div>
 
-          <Field label="Descripción">
-            <textarea rows={3} value={form.description}
+          <Field label="Descripción del producto (especificaciones, características, uso del chatbot)">
+            <textarea rows={6} value={form.description}
               onChange={(e) => setForm({ ...form, description: e.target.value })}
-              placeholder="Descripción del producto..."
+              placeholder="Ej: Pantalla 2.4&quot; · Batería 1450mAh · Dual SIM · Radio FM · Linterna · Bluetooth. Ideal para adultos mayores o uso básico. Incluye cargador y auriculares..."
               className={inputClass + " resize-none"}
               style={inputStyle}
               {...inputFocusHandler}
