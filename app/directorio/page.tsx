@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { paises } from "@/lib/directorio-data";
 
 export default function DirectorioHome() {
@@ -16,11 +17,14 @@ export default function DirectorioHome() {
           {paises.map((pais) => (
             <Link key={pais.slug} href={`/directorio/${pais.slug}`}>
               <div className="flex flex-col items-center gap-1.5">
-                <div
-                  className="w-full aspect-square rounded-[22%] flex items-center justify-center text-4xl shadow-lg"
-                  style={{ backgroundColor: pais.color + "33", border: `2px solid ${pais.color}44` }}
-                >
-                  <span style={{ fontSize: "2rem" }}>{pais.bandera}</span>
+                <div className="w-full aspect-square rounded-[22%] overflow-hidden shadow-lg relative">
+                  <Image
+                    src={`https://flagcdn.com/w160/${pais.codigo}.png`}
+                    alt={pais.nombre}
+                    fill
+                    className="object-cover"
+                    unoptimized
+                  />
                 </div>
                 <span className="text-white text-[11px] text-center leading-tight font-medium">
                   {pais.nombre}
