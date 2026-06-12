@@ -1,6 +1,7 @@
 import { getAllProductsAdmin } from "@/lib/actions/products";
 import { formatPrice, getStockStatus } from "@/lib/utils";
 import StockUpdateButton from "@/components/admin/StockUpdateButton";
+import StockExcelTools from "@/components/admin/StockExcelTools";
 
 export default async function StockPage() {
   const products = await getAllProductsAdmin();
@@ -13,9 +14,12 @@ export default async function StockPage() {
 
   return (
     <div className="p-6 lg:p-8 space-y-6">
-      <div>
-        <h1 className="text-white font-display font-bold text-2xl">Gestión de Stock</h1>
-        <p className="text-[#A1A1AA] text-sm mt-1">Actualizá el stock de cada producto.</p>
+      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
+        <div>
+          <h1 className="text-white font-display font-bold text-2xl">Gestión de Stock</h1>
+          <p className="text-[#A1A1AA] text-sm mt-1">Actualizá el stock o importá productos desde Excel.</p>
+        </div>
+        <StockExcelTools />
       </div>
 
       {/* Summary */}
