@@ -33,31 +33,32 @@ export interface Pais {
   slug: string;
   nombre: string;
   bandera: string;
+  codigo: string;
   color: string;
 }
 
 export const paises: Pais[] = [
-  { slug: "argentina", nombre: "Argentina", bandera: "🇦🇷", color: "#74b9ff" },
-  { slug: "bolivia", nombre: "Bolivia", bandera: "🇧🇴", color: "#fdcb6e" },
-  { slug: "brasil", nombre: "Brasil", bandera: "🇧🇷", color: "#00b894" },
-  { slug: "chile", nombre: "Chile", bandera: "🇨🇱", color: "#d63031" },
-  { slug: "china", nombre: "China", bandera: "🇨🇳", color: "#d63031" },
-  { slug: "colombia", nombre: "Colombia", bandera: "🇨🇴", color: "#fdcb6e" },
-  { slug: "costarica", nombre: "Costa Rica", bandera: "🇨🇷", color: "#0984e3" },
-  { slug: "cuba", nombre: "Cuba", bandera: "🇨🇺", color: "#0984e3" },
-  { slug: "ecuador", nombre: "Ecuador", bandera: "🇪🇨", color: "#fdcb6e" },
-  { slug: "elsalvador", nombre: "El Salvador", bandera: "🇸🇻", color: "#0984e3" },
-  { slug: "guatemala", nombre: "Guatemala", bandera: "🇬🇹", color: "#00cec9" },
-  { slug: "honduras", nombre: "Honduras", bandera: "🇭🇳", color: "#0984e3" },
-  { slug: "mexico", nombre: "México", bandera: "🇲🇽", color: "#00b894" },
-  { slug: "nicaragua", nombre: "Nicaragua", bandera: "🇳🇮", color: "#0984e3" },
-  { slug: "panama", nombre: "Panamá", bandera: "🇵🇦", color: "#e17055" },
-  { slug: "paraguay", nombre: "Paraguay", bandera: "🇵🇾", color: "#d63031" },
-  { slug: "peru", nombre: "Perú", bandera: "🇵🇪", color: "#d63031" },
-  { slug: "puertorico", nombre: "Puerto Rico", bandera: "🇵🇷", color: "#e17055" },
-  { slug: "repdom", nombre: "Rep. Dom.", bandera: "🇩🇴", color: "#0984e3" },
-  { slug: "uruguay", nombre: "Uruguay", bandera: "🇺🇾", color: "#74b9ff" },
-  { slug: "venezuela", nombre: "Venezuela", bandera: "🇻🇪", color: "#d63031" },
+  { slug: "argentina", nombre: "Argentina", bandera: "🇦🇷", codigo: "ar", color: "#74b9ff" },
+  { slug: "bolivia", nombre: "Bolivia", bandera: "🇧🇴", codigo: "bo", color: "#fdcb6e" },
+  { slug: "brasil", nombre: "Brasil", bandera: "🇧🇷", codigo: "br", color: "#00b894" },
+  { slug: "chile", nombre: "Chile", bandera: "🇨🇱", codigo: "cl", color: "#d63031" },
+  { slug: "china", nombre: "China", bandera: "🇨🇳", codigo: "cn", color: "#d63031" },
+  { slug: "colombia", nombre: "Colombia", bandera: "🇨🇴", codigo: "co", color: "#fdcb6e" },
+  { slug: "costarica", nombre: "Costa Rica", bandera: "🇨🇷", codigo: "cr", color: "#0984e3" },
+  { slug: "cuba", nombre: "Cuba", bandera: "🇨🇺", codigo: "cu", color: "#0984e3" },
+  { slug: "ecuador", nombre: "Ecuador", bandera: "🇪🇨", codigo: "ec", color: "#fdcb6e" },
+  { slug: "elsalvador", nombre: "El Salvador", bandera: "🇸🇻", codigo: "sv", color: "#0984e3" },
+  { slug: "guatemala", nombre: "Guatemala", bandera: "🇬🇹", codigo: "gt", color: "#00cec9" },
+  { slug: "honduras", nombre: "Honduras", bandera: "🇭🇳", codigo: "hn", color: "#0984e3" },
+  { slug: "mexico", nombre: "México", bandera: "🇲🇽", codigo: "mx", color: "#00b894" },
+  { slug: "nicaragua", nombre: "Nicaragua", bandera: "🇳🇮", codigo: "ni", color: "#0984e3" },
+  { slug: "panama", nombre: "Panamá", bandera: "🇵🇦", codigo: "pa", color: "#e17055" },
+  { slug: "paraguay", nombre: "Paraguay", bandera: "🇵🇾", codigo: "py", color: "#d63031" },
+  { slug: "peru", nombre: "Perú", bandera: "🇵🇪", codigo: "pe", color: "#d63031" },
+  { slug: "puertorico", nombre: "Puerto Rico", bandera: "🇵🇷", codigo: "pr", color: "#e17055" },
+  { slug: "repdom", nombre: "Rep. Dom.", bandera: "🇩🇴", codigo: "do", color: "#0984e3" },
+  { slug: "uruguay", nombre: "Uruguay", bandera: "🇺🇾", codigo: "uy", color: "#74b9ff" },
+  { slug: "venezuela", nombre: "Venezuela", bandera: "🇻🇪", codigo: "ve", color: "#d63031" },
 ];
 
 export const categorias: Categoria[] = [
