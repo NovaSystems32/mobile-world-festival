@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { Menu, X, ShoppingCart, MessageCircle } from "lucide-react";
 import { whatsappLink } from "@/lib/utils";
 import { useCart } from "@/store/cartStore";
@@ -20,6 +21,21 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const { items, openCart }     = useCart();
   const totalItems              = items.reduce((a, i) => a + i.quantity, 0);
+  const router                  = useRouter();
+  const clickCount              = useRef(0);
+  const clickTimer              = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  function handleLogoClick(e: React.MouseEvent) {
+    clickCount.current += 1;
+    if (clickTimer.current) clearTimeout(clickTimer.current);
+    if (clickCount.current >= 3) {
+      clickCount.current = 0;
+      e.preventDefault();
+      router.push("/admin");
+    } else {
+      clickTimer.current = setTimeout(() => { clickCount.current = 0; }, 600);
+    }
+  }
 
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 20);
@@ -61,7 +77,7 @@ export default function Header() {
         <div className="flex items-center justify-between h-16 lg:h-[68px]">
 
           {/* Logo — rounded frame with glow + name */}
-          <Link href="/" className="flex items-center gap-3 flex-shrink-0 group">
+          <Link href="/" className="flex items-center gap-3 flex-shrink-0 group" onClick={handleLogoClick}>
             <div
               className="relative w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 cursor-pointer"
               style={{
