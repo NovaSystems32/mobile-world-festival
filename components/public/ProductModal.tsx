@@ -24,11 +24,16 @@ export default function ProductModal({ product, onClose }: Props) {
   const [activeImg, setActiveImg] = useState(0);
   const [qty, setQty] = useState(1);
   const [added, setAdded] = useState(false);
+  const [priceType, setPriceType] = useState<"retail" | "wholesale">("retail");
   const { addItem, openCart } = useCart();
   const status = getStockStatus(product.stock, product.low_stock_alert);
 
   const dotColor = { green: "#22C55E", yellow: "#D97706", red: "#DC2626" }[status.color];
   const stockBg  = { green: "#082019", yellow: "#2D2008", red: "#200D0D" }[status.color];
+
+  const activePrice = priceType === "wholesale" && product.wholesale_price
+    ? product.wholesale_price
+    : product.price;
 
   // Cerrar con Escape
   useEffect(() => {
@@ -42,7 +47,8 @@ export default function ProductModal({ product, onClose }: Props) {
   }, [onClose]);
 
   function handleAdd() {
-    for (let i = 0; i < qty; i++) addItem(product);
+    const productWithPrice = { ...product, price: activePrice };
+    for (let i = 0; i < qty; i++) addItem(productWithPrice);
     setAdded(true);
     setTimeout(() => { setAdded(false); onClose(); openCart(); }, 700);
   }
@@ -155,17 +161,39 @@ export default function ProductModal({ product, onClose }: Props) {
                 {product.sku && <p className="text-xs mt-1" style={{ color: "#475569" }}>SKU: {product.sku}</p>}
               </div>
 
+              {/* Selector minorista / mayorista */}
+              {product.wholesale_price && (
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => setPriceType("retail")}
+                    className="flex-1 py-2 rounded-xl text-xs font-semibold transition-all"
+                    style={{
+                      background: priceType === "retail" ? "#0D1E36" : "#0F1A29",
+                      border: `1px solid ${priceType === "retail" ? "#3B82F6" : "#1E2A3A"}`,
+                      color: priceType === "retail" ? "#60A5FA" : "#475569",
+                    }}
+                  >
+                    Minorista
+                  </button>
+                  <button
+                    onClick={() => setPriceType("wholesale")}
+                    className="flex-1 py-2 rounded-xl text-xs font-semibold transition-all"
+                    style={{
+                      background: priceType === "wholesale" ? "#2D2008" : "#0F1A29",
+                      border: `1px solid ${priceType === "wholesale" ? "#D97706" : "#1E2A3A"}`,
+                      color: priceType === "wholesale" ? "#FBBF24" : "#475569",
+                    }}
+                  >
+                    Mayorista
+                  </button>
+                </div>
+              )}
+
               {/* Price */}
               <div className="flex items-end gap-3">
                 <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 800, fontSize: "30px", color: "#F1F5F9", lineHeight: 1 }}>
-                  {formatPrice(product.price)}
+                  {formatPrice(activePrice)}
                 </span>
-                {product.wholesale_price && (
-                  <div className="pb-0.5">
-                    <p className="text-[10px]" style={{ color: "#64748B" }}>Mayorista</p>
-                    <p className="font-bold text-sm" style={{ color: "#FBBF24" }}>{formatPrice(product.wholesale_price)}</p>
-                  </div>
-                )}
               </div>
 
               {/* Stock */}
@@ -198,7 +226,7 @@ export default function ProductModal({ product, onClose }: Props) {
                       style={{ background: "#0F1A29", color: "#64748B" }}>+</button>
                   </div>
                   <span className="text-sm font-bold" style={{ color: "#60A5FA" }}>
-                    = {formatPrice(product.price * qty)}
+                    = {formatPrice(activePrice * qty)}
                   </span>
                 </div>
               </div>
