@@ -6,9 +6,10 @@ export default function DirectorioHome() {
   return (
     <div className="min-h-screen bg-black text-white">
       {/* Header */}
-      <div className="px-4 pt-12 pb-4">
-        <h1 className="text-3xl font-bold text-white">🌎 Directorio</h1>
-        <p className="text-gray-400 mt-1 text-sm">Seleccioná un país para explorar empresas</p>
+      <div className="px-4 pt-12 pb-6 flex flex-col items-center text-center">
+        <Image src="/logo.png" alt="Mobile World Festival" width={72} height={72} className="rounded-2xl mb-3 shadow-lg" />
+        <h1 className="text-2xl font-bold tracking-tight text-white">Directorio</h1>
+        <p className="text-gray-400 mt-1 text-sm font-medium">Seleccioná un país para explorar empresas</p>
       </div>
 
       {/* Countries Grid */}
