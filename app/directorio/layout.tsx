@@ -1,4 +1,7 @@
 import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 export const metadata: Metadata = {
   title: "Mobile World Festival – Directorio",
@@ -7,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function DirectorioLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-screen bg-black" style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" }}>
+    <div className={`min-h-screen bg-black ${inter.variable}`} style={{ fontFamily: "var(--font-inter), -apple-system, BlinkMacSystemFont, sans-serif" }}>
       <div className="mx-auto max-w-[480px] min-h-screen bg-black">
         {children}
       </div>
